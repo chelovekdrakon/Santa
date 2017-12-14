@@ -11,6 +11,13 @@ export default class TileCollider {
     }
 
     checkX(entity, camera) {
+        if (entity.pos.x < 0 ) {
+            entity.pos.x = 0;
+        } 
+         if (entity.bounds.right > this.tiles.tileSize * this.tiles.matrix.grid.length) {
+            entity.pos.x = this.tiles.tileSize * this.tiles.matrix.grid.length - entity.size.x  ;
+        } 
+
         let x;
         if (entity.vel.x > 0) {
             x = entity.bounds.right;

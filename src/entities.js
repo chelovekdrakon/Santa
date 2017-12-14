@@ -4,7 +4,7 @@ import {createGreenFactory} from './Entities/Green';
 import {createPurpleFactory} from './Entities/Purple';
 import {createBlackFactory} from './Entities/Black';
 
-
+import PlayerController from './Traits/PlayerController';
 
 import setupKeyboard from './input';
 import {setupMouseControl} from './debug';
@@ -31,6 +31,7 @@ export function createEntities(sprites, layout) {
     const createCosmo = createCosmoFactory(sprites);
     const cosmo = createCosmo();
 
+    createPlayerEnv(cosmo);
 
     const input = setupKeyboard(cosmo);
     setupMouseControl(canvas, cosmo, sprites.camera);
@@ -40,6 +41,13 @@ export function createEntities(sprites, layout) {
       this.go.dragFactor = turboOn ? FAST_DRAG : SLOW_DRAG;
     }    
 */
-    return cosmo;
+    // return cosmo;
 
+}
+
+function createPlayerEnv (playerEntity) {
+    
+    const playerControl = new PlayerController();
+    playerControl.checkPoint.set(42, 42);
+    playerEntity.addTrait(playerControl);
 }

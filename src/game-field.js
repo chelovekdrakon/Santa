@@ -4,7 +4,6 @@ import {createEntities} from './entities';
 import Timer from './timer';
 import {createCollisionLayer, drawBackground, createCameraLayer} from './layers';
 
-
 export default function drawField(context, canvas) {
     Promise.all([
         loadImage('./images/sprites.png'),
@@ -22,6 +21,8 @@ export default function drawField(context, canvas) {
         const drawBackgroundLayer = drawBackground(sprites, layout);
         createEntities(sprites, layout);
 
+        console.log(sprites.entities);
+
         const drawCollisions = createCollisionLayer(sprites);
         const drawCameraView = createCameraLayer(sprites.camera);
 
@@ -36,12 +37,12 @@ export default function drawField(context, canvas) {
 
                 drawBackgroundLayer(context);
                 sprites.update(deltaTime, context);
-                
+
                 drawCollisions(context, sprites.camera);
                 drawCameraView(context, sprites.camera);
         }
         timer.start();
 
-        window.sprites = sprites;
+        // window.sprites = sprites;
     });
 }

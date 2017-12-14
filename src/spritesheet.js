@@ -111,9 +111,11 @@ export default class Spritesheet {
             if (entity.name === 'cosmo') {
                 this.drawCosmo(entity, context);
 
-                if (entity.pos.x > 300) {
-                    this.camera.pos.x = entity.pos.x - 300;
-                }
+                // if (entity.pos.x > 300) {
+                //     this.camera.pos.x = entity.pos.x - 300;
+                // }
+
+                this.camera.pos.x = Math.max(0, entity.pos.x - 300);
 
             } else if (entity.name !== 'cosmo') {
                 this.draw(entity.picture, context, entity.pos.x, entity.pos.y)
