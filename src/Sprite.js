@@ -18,6 +18,7 @@ export default class Sprite extends Spritesheet {
     }
 
     draw(name, context, x, y, type, flip) {
+
         const buffer = this.tiles.get(`${name}.png`)[flip ? 1 : 0];
 
         if (type) {
@@ -28,8 +29,13 @@ export default class Sprite extends Spritesheet {
                 });
             }
 
-            x = x * buffer.width;
-            y = y * buffer.width;
+            if (name.includes('coin') || name.includes('key')) {
+                x = x * this.TILE_SIZE;
+                y = y * this.TILE_SIZE;
+            } else {
+                x = x * buffer.width;
+                y = y * buffer.width; 
+            }
         }
 
         context.drawImage(buffer, x - this.camera.pos.x, y - this.camera.pos.y);

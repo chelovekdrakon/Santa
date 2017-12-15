@@ -67,7 +67,6 @@ export default class TileCollider {
                     entity.bounds.bottom = match.y1;
                     entity.vel.y = 0;
 
-
                     entity.obstruct(Sides.BOTTOM);
 
                 }
