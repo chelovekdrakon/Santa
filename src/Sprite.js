@@ -22,7 +22,7 @@ export default class Sprite extends Spritesheet {
         const buffer = this.tiles.get(`${name}.png`)[flip ? 1 : 0];
 
         if (type) {
-            if (type === 'tile' || 'dec-tile') {
+            if (type !== 'decor') {
                 this.tilesMatrix.set(x, y, {
                     'name': name,
                     'type': type
@@ -34,7 +34,7 @@ export default class Sprite extends Spritesheet {
                 y = y * this.TILE_SIZE;
             } else {
                 x = x * buffer.width;
-                y = y * buffer.width; 
+                y = y * buffer.height; 
             }
         }
 
@@ -42,7 +42,7 @@ export default class Sprite extends Spritesheet {
     }
 
     drawEntity (name, context, x, y, flip = false) {
-            const buffer = this.tiles.get(nameTile)[flip ? 0 : 1];
+            const buffer = this.tiles.get(`${name}.png`)[flip ? 0 : 1];
             context.drawImage(buffer, x, y);
     }
 
@@ -76,13 +76,16 @@ export default class Sprite extends Spritesheet {
             if (entity.name === 'cosmo') {
                 this.drawCosmo(entity, context);
                 this.camera.pos.x = Math.max(0, entity.pos.x - 300);
-            } else if (entity.name !== 'cosmo') {
+            } else if (entity.name == 'key-o' || entity.name == 'coin-g') {
+                this.draw(entity.name, context, entity.pos.x , entity.pos.y )
+            } else if (entity.name !== 'cosmo') {   
                 this.draw(entity.picture, context, entity.pos.x, entity.pos.y)
-            }
+            } 
         });
 
         this.entities.forEach(entity => {
             this.entityCollider.check(entity);
         });
+
     }
 }

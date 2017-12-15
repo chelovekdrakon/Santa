@@ -40,7 +40,7 @@ export function createEnemiesFactory(sprites) {
         enemy.pos.set(posX, posY);
         enemy.vel.set(velX, velY);
         enemy.offset.set(offsetX, offsetY);
-
+// console.log(pictures);
         enemy.pictures = reverse ? Array.from(pictures).reverse() : pictures;
         enemy.picture = null;
         enemy.deadPic = deadPic;

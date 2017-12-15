@@ -11,11 +11,11 @@ export default class TileCollider {
             entity.pos.x = 0;
         }
          if (entity.bounds.right > this.tiles.tileSize * this.tiles.matrix.grid.length) {
-            entity.pos.x = this.tiles.tileSize * this.tiles.matrix.grid.length - entity.size.x  ;
+            entity.pos.x = this.tiles.tileSize * this.tiles.matrix.grid.length - entity.size.x;
         }
 
         let x;
-        if (entity.vel.x > 0) {
+        if (entity.vel.x > 0) {    
             x = entity.bounds.right;
         } else if (entity.vel.x < 0) {
             x = entity.bounds.left;
@@ -61,25 +61,37 @@ export default class TileCollider {
                                                  entity.bounds.right,
                                                  y, y);
 
-        matches.forEach( match => {
+        matches.forEach( (match, i, arr) => {
             if (entity.vel.y > 0) {
                 if (entity.bounds.bottom > match.y1) {
                     entity.bounds.bottom = match.y1;
                     entity.vel.y = 0;
+                    // console.log('matches BOTTOM');
 
                     entity.obstruct(Sides.BOTTOM);
 
                 }
             } else if (entity.vel.y < 0) {
                 if (entity.bounds.top < match.y2) {
-                    entity.bounds.top = match.y2;
-                    entity.vel.y = 0;
 
-                    entity.obstruct(Sides.TOP);
-
+                    if (this.checkToExtra(match)) {
+                        entity.stateCosmo.coins++;
+                        arr.splice(0,1);
+                         console.log('matches TOP', this.tiles.matrix.grid);
+                     } else {
+                        entity.bounds.top = match.y2;
+                        entity.vel.y = 0;
+                        entity.obstruct(Sides.TOP);
+                     }
                 }
 
             }
         });
+    }
+
+    checkToExtra (match) {
+        if (match.tile.name.includes('coin') || match.tile.name.includes('key')) {
+            return true;
+        }
     }
 }

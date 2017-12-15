@@ -15,5 +15,12 @@ export default class StateCosmo extends Trait {
         if (this.lives === 0) {
             this.alive = false;
         }
+
+        if (this.coins > 100) {
+            this.coins = 0;
+            this.lives++;
+        }
+
+
     }
 }

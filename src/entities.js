@@ -1,5 +1,6 @@
 import {createCosmoFactory} from './Entities/Cosmo';
 import {createEnemiesFactory} from './Entities/Enemies'
+import {createArtefactsFactory} from './Entities/Artefacts'
 
 import PlayerController from './Traits/PlayerController';
 
@@ -9,6 +10,9 @@ import {setupMouseControl} from './debug';
 export function createEntities(sprites, layout) {
 
     const createEnemy = createEnemiesFactory(sprites);
+    const createArtefact = createArtefactsFactory(sprites);
+
+    // console.log(layout);
 
     layout.entities.forEach(species => {
         const name = species.name;
@@ -28,6 +32,21 @@ export function createEntities(sprites, layout) {
                               reverse, pictures, deadPic);
         });
     });
+
+    layout.artefacts.forEach(artef => {
+        const name = artef.name;
+        // const [sizeX, sizeY] = artef.data.size;
+        const pictures = artef.data.pictures;
+
+        artef.positions.forEach(entity => {
+            const [posX, posY] = entity.pos;
+
+            createArtefact(name, posX, posY, 
+                              // sizeX, sizeY,
+                              pictures);
+        });
+    });
+
 
     const createCosmo = createCosmoFactory(sprites);
     const cosmo = createCosmo();
