@@ -112,12 +112,12 @@
       ]
     },
     {
-      "name": "box-gb1",
+      "name": "coin-g",
       "type": "tile",
       "pos": [
-          
+          [ 10, 11, 14, 15 ]
       ]
-    },
+    },  
     {
       "name": "sky1",
       "type": "decoration",
