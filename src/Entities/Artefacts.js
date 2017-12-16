@@ -1,6 +1,5 @@
 import Entity, {Sides, Trait} from '../Entity';
 import Killable from '../Traits/Killable';
-// import Physics from '../Traits/Physics';
 
 class Behavior extends Trait{
     constructor() {

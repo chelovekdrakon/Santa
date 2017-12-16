@@ -12,8 +12,6 @@ export function createEntities(sprites, layout) {
     const createEnemy = createEnemiesFactory(sprites);
     const createArtefact = createArtefactsFactory(sprites);
 
-    // console.log(layout);
-
     layout.entities.forEach(species => {
         const name = species.name;
         const [sizeX, sizeY] = species.data.size;
